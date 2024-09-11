@@ -40,3 +40,31 @@ from django.shortcuts import render
 #     else:
 #         form = InstructorRegistrationForm()
 #     return render(request, 'register_instructor.html', {'form': form})
+
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import login
+from django.contrib.auth.forms import AuthenticationForm
+from .forms import UserLoginForm, InstructorLoginForm
+
+def user_login_view(request):
+    if request.method == 'POST':
+        form = UserLoginForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('user_home')  # Redirect to a user home page or dashboard
+    else:
+        form = UserLoginForm(request)
+    return render(request, 'user_login.html', {'form': form})
+
+def instructor_login_view(request):
+    if request.method == 'POST':
+        form = InstructorLoginForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('instructor_home')  # Redirect to an instructor home page or dashboard
+    else:
+        form = InstructorLoginForm(request)
+    return render(request, 'instructor_login.html', {'form': form})
