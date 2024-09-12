@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'Accounts',
     'home',
     'style',
+    'django_browser_reload',
 ]
 
 MIDDLEWARE = [
