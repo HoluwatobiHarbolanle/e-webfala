@@ -30,7 +30,7 @@ urlpatterns = [
         name="schema-swagger-ui",
     ),
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
-    path("", include("allauth.urls")),
+    path("account/", include("allauth.urls")),
     path("api/register/", RegisterView.as_view(), name="rest_register"),
     path("api/login/", LoginView.as_view(), name="rest_login"),
     path("api/logout/", LogoutView.as_view(), name="rest_logout"),

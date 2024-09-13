@@ -14,3 +14,4 @@ def custom_login_view(request):
             error_message = 'Invalid email or password'
 
     return render(request, 'accounts/login.html', {'error_message': error_message})
+

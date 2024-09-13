@@ -196,4 +196,7 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 LOGIN_REDIRECT_URL = "/"
 
 # Redirect URL after signup
-ACCOUNT_SIGNUP_REDIRECT_URL = "/"
+ACCOUNT_SIGNUP_REDIRECT_URL = '/'
+
+# Redirect to the home page after logout
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
