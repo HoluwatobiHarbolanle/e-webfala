@@ -74,7 +74,7 @@ ROOT_URLCONF = 'e_webfala.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['template'],
+        'DIRS': [os.path.join(BASE_DIR, 'template')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -187,6 +187,7 @@ REST_AUTH_SERIALIZERS = {
     }
 
 AUTH_USER_MODEL = 'Accounts.CustomUser'
+
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_REQUIRED = True
@@ -199,3 +200,6 @@ LOGIN_REDIRECT_URL = '/'
 
 # Redirect URL after signup
 ACCOUNT_SIGNUP_REDIRECT_URL = '/'
+
+# Redirect to the home page after logout
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'

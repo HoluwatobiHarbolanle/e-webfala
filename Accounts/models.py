@@ -40,10 +40,11 @@ class CustomUser(AbstractUser):
     is_instructor = models.BooleanField(default=False)
     username = None 
 
+    objects = CustomUserManager()
+    
     # Use email instead of username for authentication
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
-
     def __str__(self):
         return self.email
