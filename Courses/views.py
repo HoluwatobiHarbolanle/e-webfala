@@ -7,7 +7,10 @@ from .form import (
     CoursePriceForm,
     LessonForm,
 )
+from django.views.generic import TemplateView
 from rest_framework import viewsets, permissions
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from .serializers import CourseSerializer, LessonSerializer
 
 # Create your views here.
@@ -122,3 +125,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(instructor=self.request.user)
+
+
+class CourseListView(TemplateView):
+    template_name = "course_list.html"

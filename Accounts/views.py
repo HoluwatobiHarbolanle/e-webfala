@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required
 from .models import UserProfile
 from .forms import UserProfileForm
 
-# Create your views here.
 
+# Create your views here.
 def custom_login_view(request):
     error_message = None
     if request.method == 'POST':
