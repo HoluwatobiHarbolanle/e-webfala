@@ -172,3 +172,4 @@ videos
 package.json
 package-lock.json
 tailwind.config.js
+migrations
