@@ -1,5 +1,6 @@
+from typing import Any
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Course, Video, Lesson
+from .models import Course, Video, Lesson, Category
 from .form import (
     CourseTitleForm,
     CourseCategoryForm,
@@ -9,9 +10,8 @@ from .form import (
 )
 from django.views.generic import TemplateView
 from rest_framework import viewsets, permissions
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from .serializers import CourseSerializer, LessonSerializer
+from .serializers import CourseSerializer, LessonSerializer, CategorySerializer
+from django.views.generic import ListView
 
 # Create your views here.
 
@@ -23,19 +23,19 @@ def instructor_dashboard(request):
     return render(request, "instructur_dashboard.html", {"courses": courses})
 
 
-# def course_create_title(request):
-#     if request.method == 'POST':
-#         form = CourseTitleForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             course = form.save(commit=False)
-#             course.instructor = request.user
-#             course.save()
-#             request.session['course_id'] = course.id  # Save course id to session for later steps
-#             return redirect('course_create_category')  # Go to next step
-#     else:
-#         form = CourseTitleForm()
+def course_create_title(request):
+    if request.method == 'POST':
+        form = CourseTitleForm(request.POST, request.FILES)
+        if form.is_valid():
+            course = form.save(commit=False)
+            course.instructor = request.user
+            course.save()
+            request.session['course_id'] = course.id  # Save course id to session for later steps
+            return redirect('course_create_category')  # Go to next step
+    else:
+        form = CourseTitleForm()
 
-#     return render(request, 'course_title.html', {'form': form})
+    return render(request, 'course_title.html', {'form': form})
 
 # # Step 2: Category
 # def course_create_category(request):
@@ -109,10 +109,21 @@ def instructor_dashboard(request):
 #     return render(request, 'course_detail.html', {'course': course, 'lessons': lessons})
 
 
-# class CategoryViewSet(viewsets.ModelViewSet):
-#     queryset = Category.objects.all()
-#     serializer_class = CategorySerializer
-#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+    def get_queryset(self):
+        return Category.objects.all()
+    
+class CategoryListView(TemplateView):
+    template_name = 'categories.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.prefetch_related('courses').all()  # Fetch all categories
+        return context
+
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -121,7 +132,21 @@ class CourseViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
-        return Course.objects.all()
+        queryset = Course.objects.all()
+    
+        category = self.request.query_params.get('category', None)
+        minimum_price = self.request.query_params.get('minimum_price', None)
+        maximum_price = self.request.query_params.get('maximum_price', None)
+
+        if category:
+            queryset = queryset.filter(category_name=category)
+
+        if minimum_price and maximum_price:
+            queryset = queryset.filter(price_greaterthan=minimum_price, price_lessthan=maximum_price)
+
+        return queryset
+    
+
 
     def perform_create(self, serializer):
         serializer.save(instructor=self.request.user)
@@ -129,3 +154,23 @@ class CourseViewSet(viewsets.ModelViewSet):
 
 class CourseListView(TemplateView):
     template_name = "course_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        queryset = Course.objects.all()
+
+        category = self.request.GET.get('category', None)
+        minimum_price = self.request.GET.get('minimum_price', None)
+        maximum_price = self.request.GET.get('maximum_price', None)
+
+        if category:
+            queryset = queryset.filter(category_name=category)
+
+        if minimum_price and maximum_price:
+            queryset = queryset.filter(price_greaterthan=minimum_price, price_lessthan=maximum_price)
+
+        context['courses'] = queryset
+        context['categories'] = Category.objects.all()
+
+        return context
