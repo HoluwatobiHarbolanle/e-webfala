@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from Courses.models import Course
 from django.contrib.auth.models import BaseUserManager
 
 
@@ -44,3 +45,15 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = []
     def __str__(self):
         return self.email
+
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete = models.CASCADE)
+    profile_pic = models.ImageField(upload_to="profile_image")
+    full_name = models.CharField(max_length=100, null=True, blank=True )
+    bio = models.CharField(max_length=255, null=True, blank=True)
+    courses_registered = models.ManyToManyField(Course)
+
+    def __str__(self):
+        return self.user.email

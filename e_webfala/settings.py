@@ -33,30 +33,29 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.sites",
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    "api",
-    "Courses",
-    "payments",
-    "Accounts",
-    "home",
-    "tailwind",
-    "style",
-    "django_browser_reload",
-    "drf_yasg",
-    "rest_framework",
-    "rest_framework_simplejwt",
-    "dj_rest_auth",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-    "dj_rest_auth.registration",
-    "rest_framework.authtoken",
+    'django.contrib.sites',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'api',
+    'Courses',
+    'payments',
+    'Accounts',
+    'home',
+    'style',
+    'drf_yasg',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'dj_rest_auth',  
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dj_rest_auth.registration',
+    'rest_framework.authtoken' , 
+
 ]
 
 MIDDLEWARE = [
@@ -189,8 +188,8 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 # Redirect URL after login
 LOGIN_REDIRECT_URL = "/"
