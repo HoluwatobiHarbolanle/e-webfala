@@ -53,7 +53,7 @@ class UserProfile(models.Model):
     profile_pic = models.ImageField(upload_to="profile_image")
     full_name = models.CharField(max_length=100, null=True, blank=True )
     bio = models.CharField(max_length=255, null=True, blank=True)
-    courses_registered = models.ManyToManyField(Course)
+    
 
     def __str__(self):
         return self.user.email
