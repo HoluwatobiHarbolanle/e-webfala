@@ -36,7 +36,7 @@ urlpatterns = [
     path("api/logout/", LogoutView.as_view(), name="rest_logout"),
     path("api/user/", UserDetailsView.as_view(), name="rest_user_details"),
     path("admin/", admin.site.urls),
-    path("accounts/", include("Accounts.urls")),
+    # path("accounts/", include("Accounts.urls")),
     path("", include("home.urls")),
     path("payments/", include("payments.urls")),
     path("", include("Courses.urls")),
