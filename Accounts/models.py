@@ -43,4 +43,4 @@ class CustomUser(AbstractUser):
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
     def __str__(self):
-        return self.email
+        return self.emai
