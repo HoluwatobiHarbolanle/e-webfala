@@ -41,6 +41,7 @@ urlpatterns = [
     path("", include("Courses.urls")),
     path("__reload__/", include("django_browser_reload.urls")),
     path("api/", include(router.urls)),
+    path("accounts/", include("Accounts.urls")),
 ]
 
 # Add this section to serve media files during development
