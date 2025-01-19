@@ -25,23 +25,20 @@ def profile_form(request):
     form = UserProfileForm()
     return render(request, "profile_form.html", {"form": form})
 
-login_required
-def profile_view(request):
-    profile = UserProfile.objects.get(user=request.user)
+# login_required
+# def profile_view(request):
+#     profile = UserProfile.objects.get(user=request.user)
 
-    if request.method == 'POST':
-        form = UserProfileForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
-            return redirect('profile')  
-    else:
-        form = UserProfileForm(instance=profile)
+#     if request.method == 'POST':
+#         form = UserProfileForm(request.POST, instance=profile)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('profile')  
+#     else:
+#         form = UserProfileForm(instance=profile)
 
-    return render(request, 'profile.html', {'form': form, 'profile': profile})
+#     return render(request, 'profile.html', {'form': form, 'profile': profile})
 
-from django.shortcuts import render, redirect
-from .forms import UserProfileForm
-from django.contrib.auth.decorators import login_required
 
 # @login_required
 # def profile_view(request):
