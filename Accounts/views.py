@@ -1,10 +1,9 @@
 
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
-from .models import UserProfile
 from .forms import UserProfileForm
-
+from .models import UserProfile
 
 # Create your views here.
 def custom_login_view(request):
@@ -21,8 +20,12 @@ def custom_login_view(request):
 
     return render(request, 'accounts/login.html', {'error_message': error_message})
 
-
 @login_required
+def profile_form(request):
+    form = UserProfileForm()
+    return render(request, "profile_form.html", {"form": form})
+
+login_required
 def profile_view(request):
     profile = UserProfile.objects.get(user=request.user)
 
@@ -35,3 +38,24 @@ def profile_view(request):
         form = UserProfileForm(instance=profile)
 
     return render(request, 'profile.html', {'form': form, 'profile': profile})
+
+from django.shortcuts import render, redirect
+from .forms import UserProfileForm
+from django.contrib.auth.decorators import login_required
+
+# @login_required
+# def profile_view(request):
+#     try:
+#         profile = request.user.userprofile
+#     except UserProfile.DoesNotExist:
+#         profile = None
+
+#     if request.method == 'POST':
+#         form = UserProfileForm(request.POST, request.FILES, instance=profile)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('profile')  # Adjust to your actual profile page URL
+#     else:
+#         form = UserProfileForm(instance=profile)
+
+#     return render(request, 'profile.html', {'form': form})
