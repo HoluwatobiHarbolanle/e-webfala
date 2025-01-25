@@ -60,8 +60,11 @@ def profile_form(request):
 
 def view_profile(request):
     user = request.user
-    profile = UserProfile.objects.all()
-    return render(request, 'userprofile.html', {profile: 'profile'})
+    try:
+        profile = UserProfile.objects.get(user)
+    except UserProfile.DoesNotExist:
+        profile = None
+    return render(request, 'userprofile.html', {'profile': profile})
     
 
 # login_required

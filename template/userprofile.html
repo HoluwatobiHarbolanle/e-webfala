@@ -5,11 +5,14 @@
 
 {% block content %}
 
-<div>
-    {% for p in profile %}
-        {{ p.first_name }}
-        {{ p.last_name }}
-        {{ p.bio }}
-</div>
-
+{% if profile %}
+    <p>First Name: {{ profile.first_name }}</p>
+    <p>Last Name: {{ profile.last_name }}</p>
+    <p>Bio: {{ profile.bio }}</p>
+    {% if profile.profile_pic %}
+        <img src="{{ profile.profile_pic.url }}" alt="Profile Picture">
+    {% endif %}
+{% else %}
+    <p>No profile found for this user.</p>
+{% endif %}
 {% endblock %}

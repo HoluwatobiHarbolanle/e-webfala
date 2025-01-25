@@ -200,7 +200,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'bolanleoluwatobi844@gmail.com'
-EMAIL_HOST_PASSWORD = 'rjkg xpbf zhgt udas'
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL =  'noreply@127.0.0.1'
 
 # Redirect URL after login
@@ -208,7 +208,3 @@ LOGIN_REDIRECT_URL = "/"
 
 # Redirect URL after signup
 ACCOUNT_SIGNUP_REDIRECT_URL = '/'
-
-# REST_AUTH = {
-#     'PASSWORD_RESET_SERIALIZER': 'Accounts.serializers._PasswordResetSerializer'
-# }
