@@ -49,11 +49,16 @@ class CustomUser(AbstractUser):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete= models.CASCADE)
-    profile_pic = models.ImageField(upload_to="profile_image")
-    first_name = models.CharField(max_length=20, blank=False)
-    last_name = models.CharField(max_length=20, null=True, blank=True)
-    bio = models.TextField(max_length=255, null=True, blank=True)
+    profile_pic = models.ImageField(upload_to="profile_image", blank=True, null=True)
+    first_name = models.CharField(max_length=20, null=False, blank=False)
+    last_name = models.CharField(max_length=20, null=False, blank=False)
+    bio = models.TextField(max_length=255, null=False, blank=False)
     courses_registered = models.ManyToManyField(Course)
     
     def __str__(self):
         return self.user.email
+    
+class InstructorProfile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete= models.CASCADE)
+    first_name = models.CharField(max_length=20, null=False, blank=False)
+    last_name = models.CharField(max_length=20, null=False, blank=False)

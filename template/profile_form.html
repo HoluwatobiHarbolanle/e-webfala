@@ -1,34 +1,42 @@
-{% extends 'base.html' %}
+{% extends 'extra_base.html' %}
 
-{% block title %} Profile Form {% endblock %}
+{% block title %}User Profile Form - E-webfala{% endblock %}
 
 {% block content %}
 
-<div class="w-96 max-w-[30rem] m-auto rounded-md -2">
-    <h2 class="text-lg font-medium text-gray-900 text-center mb-2">Profile</h2>
-    <form method="POST" enctype="multipart/form-data" action="{% url 'profile_form' %}" class="space-y-4 w-[30rem]">
+<div class="flex space-x-8 text-lg justify-center font-semibold mb-4">
+    <a href="{% url 'profile_form' %}" class="text-gray-700 hover:underline {% if request.path == '/accounts/profile_form/' %}underline{% endif %}">Student</a>
+    <a href="#" class="text-gray-700 hover:underline {% if request.path == '/accounts/instructor_profile_form/' %}underline{% endif %}">Instructor</a>
+</div>
+
+<div class=" max-w-3xl m-auto rounded-md p-4 shadow-lg bg-white">
+    <h2 class="text-2xl font-semibold text-gray-700 text-center mb-6">Profile</h2>
+    <form method="POST" enctype="multipart/form-data" action="{% url 'profile_form' %}" class="gap-8 flex justify-center items-center">
         {% csrf_token %}
-        <div class="block m-auto">
-            <div class="w">
+        <div class="block m-auto w-fit space-y-4">
+            <div class="">
                 <img src="https://via.placeholder.com/150" alt="Profile Picture" class="w-48 h-48 rounded-full object-cover border-4 border-gray-300">
             </div>
-            <input type="file" name="profile_pic" id="id_profile_pic" class=" mt-2">
+            <input type="file" name="profile_pic" id="id_profile_pic" class="mt-2 p-2 border rounded-md text-sm" value="{{ form.profile_pic.value }}">
             <label for="id_profile_pic" class="block text-md font-medium text-gray-700">Profile picture</label> 
         </div>
-        <div>
-            <label for="id_first_name" class="block text-md font-medium text-gray-700">First Name</label>
-            <input type="text" name="first_name" id="id_first_name" class="w-full border rounded-md p-2 -2">
+
+        <div class="w-[30rem] space-y-4">
+            <div>
+                <label for="id_first_name" class="block text-sm font-medium text-gray-700">First Name</label>
+                <input type="text" name="first_name" id="id_first_name" class="w-full border rounded-md p-2" value="{{ form.first_name.value }}" required>
+            </div>
+            <div>
+                <label for="id_last_name" class="block text-sm font-medium text-gray-700">Last Name</label>
+                <input type="text" name="last_name" id="id_last_name" class="w-full border rounded-md p-2" value="{{ form.last_name.value }}" required>
+            </div>
+            <div>
+                <label for="id_bio" class="block text-sm font-medium text-gray-700">Bio</label>
+                <textarea name="bio" id="id_bio" rows="4" class="w-full border rounded-md p-2" required>{{ form.bio.value }}</textarea>
+            </div>
+
+            <button type="submit" class="bg-gray-700 hover:bg-gray-800 text-white text-sm p-2 block w-full rounded-md">Save</button>
         </div>
-        <div>
-            <label for="id_last_name" class="block text-md font-medium text-gray-700">Last Name</label>
-            <input type="text" name="last_name" id="id_last_name" class="w-full border rounded-md p-2 -2">
-        </div>
-        <div>
-            <label for="id_bio" class="block text-md font-medium text-gray-700">Bio</label>
-            <textarea name="bio" id="id_bio" rows="4" class="w-full border rounded-md p-2 mt-2"></textarea>
-        </div>
-        <!-- {{ form.as_p }} -->
-        <button type="submit" class="bg-black text-white text-sm p-4 block -auto rounded-md">Save</button>
     </form>
 </div>
 

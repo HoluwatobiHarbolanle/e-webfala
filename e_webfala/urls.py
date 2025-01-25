@@ -8,13 +8,14 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from dj_rest_auth.registration.views import RegisterView
 from dj_rest_auth.views import LoginView, LogoutView, UserDetailsView
+# from rest_auth.views import PasswordResetView, PasswordResetConfirmView
 
 
 router = DefaultRouter()
 
 
 schema_view = get_schema_view(
-    openapi.Info(
+    openapi.Info( 
         title="Udemy Clone API",
         default_version="v1",
         description="API documentation for the Udemy clone",
@@ -36,7 +37,6 @@ urlpatterns = [
     path("api/logout/", LogoutView.as_view(), name="rest_logout"),
     path("api/user/", UserDetailsView.as_view(), name="rest_user_details"),
     path("admin/", admin.site.urls),
-    # path("accounts/", include("Accounts.urls")),
     path("", include("home.urls")),
     path("payments/", include("payments.urls")),
     path("", include("Courses.urls")),
