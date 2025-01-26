@@ -1,5 +1,9 @@
 from django.urls import include, path
+<<<<<<< HEAD
 from .views import instructor_dashboard, create_checkout_session, enrolled_courses, course_progress, user_courses
+=======
+from .views import instructor_dashboard
+>>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11
 from rest_framework.routers import DefaultRouter
 from .views import CourseViewSet, CategoryViewSet, CategoryListView, CourseListView
 
@@ -17,9 +21,12 @@ urlpatterns = [
     path("api/", include(router.urls)),
     path("api/courses/", include(router.urls)),
     path("courses/", CourseListView.as_view(), name="course_list"),
+<<<<<<< HEAD
     path('create-checkout-session/<int:course_id>/', create_checkout_session, name='create_checkout_session'),
     path('dashboard/', enrolled_courses, name='dashboard'),
     path('progress/<int:course_id>/', course_progress, name='course_progress'),
     path('my-courses/', user_courses, name='user_courses'),
+=======
+>>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11
 ]
 

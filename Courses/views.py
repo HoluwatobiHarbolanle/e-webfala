@@ -1,6 +1,10 @@
 from typing import Any
 from django.shortcuts import render, redirect, get_object_or_404
+<<<<<<< HEAD
 from .models import Course, Video, Lesson, Category, Enrollment, Progress
+=======
+from .models import Course, Video, Lesson, Category
+>>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11
 from .form import (
     CourseTitleForm,
     CourseCategoryForm,
@@ -10,6 +14,7 @@ from .form import (
 )
 from django.views.generic import TemplateView
 from rest_framework import viewsets, permissions
+<<<<<<< HEAD
 from .serializers import CourseSerializer, CategorySerializer
 from django.views.generic import ListView
 import stripe
@@ -17,6 +22,14 @@ from django.http import JsonResponse
 
 # Create your views here.
 
+=======
+from .serializers import CourseSerializer, LessonSerializer, CategorySerializer
+from django.views.generic import ListView
+
+# Create your views here.
+
+
+>>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11
 def instructor_dashboard(request):
     courses = Course.objects.filter(
         instructor=request.user
@@ -38,6 +51,7 @@ def course_create_title(request):
 
     return render(request, 'course_title.html', {'form': form})
 
+<<<<<<< HEAD
 def create_checkout_session(request, course_id):
     course = Course.objects.get(id=course_id)
 
@@ -162,6 +176,8 @@ def user_courses(request):
     })
 
 
+=======
+>>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11
 # # Step 2: Category
 # def course_create_category(request):
 #     course_id = request.session.get('course_id')
@@ -192,6 +208,7 @@ def user_courses(request):
 
 #     return render(request, 'course_price.html', {'form': form})
 
+<<<<<<< HEAD
 def upload_lesson(request):
     course_id = request.session.get('course_id')
     course = Course.objects.get(id=course_id)
@@ -207,6 +224,23 @@ def upload_lesson(request):
         form = LessonForm()
 
     return render(request, 'upload_lesson.html', {'form': form, 'course': course})
+=======
+# def upload_lesson(request):
+#     course_id = request.session.get('course_id')
+#     course = Course.objects.get(id=course_id)
+
+#     if request.method == 'POST':
+#         form = LessonForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             lesson = form.save(commit=False)
+#             lesson.course = course
+#             lesson.save()
+#             return redirect('course_review')  # Redirect to course detail page
+#     else:
+#         form = LessonForm()
+
+#     return render(request, 'upload_lesson.html', {'form': form, 'course': course})
+>>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11
 
 
 # # Step 5: Review and Submit

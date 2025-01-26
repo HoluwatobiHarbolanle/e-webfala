@@ -36,6 +36,7 @@ class CustomUser(AbstractUser):
     is_instructor = models.BooleanField(default=False)
     username = None
 
+<<<<<<< HEAD
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -44,3 +45,24 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+=======
+    objects = CustomUserManager()
+    
+    # Use email instead of username for authentication
+    USERNAME_FIELD = 'email'
+    EMAIL_FIELD = 'email'
+    REQUIRED_FIELDS = []
+    def __str__(self):
+        return self.email
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete= models.CASCADE)
+    profile_pic = models.ImageField(upload_to="profile_image")
+    first_name = models.CharField(max_length=20, blank=False)
+    last_name = models.CharField(max_length=20, null=True, blank=True)
+    bio = models.TextField(max_length=255, null=True, blank=True)
+    
+    def __str__(self):
+        return self.user.email
+>>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11

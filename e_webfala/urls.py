@@ -30,7 +30,11 @@ urlpatterns = [
         name="schema-swagger-ui",
     ),
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
+<<<<<<< HEAD
     path("", include("allauth.urls")),
+=======
+    path("account/", include("allauth.urls")),
+>>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11
     path("api/register/", RegisterView.as_view(), name="rest_register"),
     path("api/login/", LoginView.as_view(), name="rest_login"),
     path("api/logout/", LogoutView.as_view(), name="rest_logout"),
@@ -41,6 +45,10 @@ urlpatterns = [
     path("", include("Courses.urls")),
     path("__reload__/", include("django_browser_reload.urls")),
     path("api/", include(router.urls)),
+<<<<<<< HEAD
+=======
+    path("accounts/", include("Accounts.urls")),
+>>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11
 ]
 
 # Add this section to serve media files during development
