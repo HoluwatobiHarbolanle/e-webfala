@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Review</title>
+</head>
+<body>
+    <h2>Review Your Course</h2>
+    <p>Title: {{ course.title }}</p>
+    <p>Description: {{ course.description }}</p>
+    <p>Category: {{ course.category }}</p>
+    <p>Price: ${{ course.price }}</p>
+    <p>Cover image:
+        <img class="w-full h-[1rem] object-cover rounded-lg mb-4" src="{{ course.cover_photo.url }}" alt="">
+    </p>
+
+    <h2>Lessons</h2>
+{% for lesson in lessons %}
+<div class="lesson">
+    <h3>{{ lesson.title }}</h3>
+    {% if lesson.video_file %}
+        <video controls>
+            <source src="{{ lesson.video_file.url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    {% endif %}
+    
+    {% if lesson.pdf_file %}
+        <p><a href="{{ lesson.pdf_file.url }}">Download PDF</a></p>
+    {% endif %}
+    
+    {% if lesson.content %}
+        <p>{{ lesson.content }}</p>
+    {% endif %}
+</div>
+{% empty %}
+<p>No lessons available for this course yet.</p>
+{% endfor %}
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Submit Course</button>
+    </form>
+    
+</body>
+</html>

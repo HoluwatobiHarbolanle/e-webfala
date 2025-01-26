@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course List</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans antialiased">
+
+    <!-- Container -->
+    <div class="container mx-auto px-4 py-6">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800">Course List</h1>
+            <p class="text-lg text-gray-600 mt-2">Explore our courses and start learning today!</p>
+        </div>
+
+        <!-- Featured Courses Section -->
+        <div class="bg-white p-8 rounded-lg mt-8">
+            <h3 class="text-2xl font-bold text-secondary mb-4">Featured Courses</h3>
+
+            <!-- Course Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <form method="GET">
+                    <div>
+                        <label for="category">Category</label>
+                        <select name="category" id="category">
+                            <option value="">All Categories</option>
+                            {% for category in categories %}
+                            <option value="{{ category.category_name }}"
+                            {% if request.GET.category=category.category_name %}selected{% endif %}>
+                        {{} category.category_name }
+                            </option>
+                            {% endf%}
+                        </select>
+                    </div>
+                </form>
+                {% for course in courses %}
+                <div class="bg-primary p-6 rounded-lg ">
+                    <li>
+                        <h2>{{ course.title }}</h2>
+                        <p>Category: {{ course.category_name }}</p>
+                        <p>Price: {{ course.price }}</p>
+                        <p>Instructor: {{ course.instructor}}</p>
+                    </li>
+                    <!-- Course Image/Video -->
+                    {% if course.cover_photo %}
+                    <img class="w-full h-[1rem] object-cover rounded-lg mb-4" src="{{ course.cover_photo.url }}" alt="">
+                    {% else %}
+                    <img src="https://placehold.co/400x225" alt="Course thumbnail" class="w-full h-auto object-cover rounded-lg mb-4">
+                    {% endif %}
+
+                    <!-- Course Content -->
+                    <h4 class="text-2xl font-semibold text-secondary mb-2 capitalize">{{ course.title }}</h4>
+                    <p class="text-[0.3rem] mb-4">{{ course.description }}</p>
+                    <a href="{% url 'course_detail' course.id %}" class="text-accent hover:text-secondary transition-colors duration-300">Enroll Now ➔</a>
+                </div>
+                {% empty %}
+                <div class="col-span-1">
+                    <p class="text-gray-600">No courses available yet.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
