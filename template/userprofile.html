@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}User Profile - E-webfala{% endblock %}
+
+
+{% block content %}
+
+{% if profile %}
+    <p>First Name: {{ profile.first_name }}</p>
+    <p>Last Name: {{ profile.last_name }}</p>
+    <p>Bio: {{ profile.bio }}</p>
+    {% if profile.profile_pic %}
+        <img src="{{ profile.profile_pic.url }}" alt="Profile Picture">
+    {% endif %}
+{% else %}
+    <p>No profile found for this user.</p>
+{% endif %}
+{% endblock %}

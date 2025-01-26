@@ -45,8 +45,8 @@
                   <div class="relative inline-block dropdown">
                     <a href="#" class="text-gray-600 hover:text-gray-900">Profile</a>
                     <ul class="absolute top-[100%] hidden left-1/2 transform -translate-x-1/2 mt-2 w-32 bg-white shadow-lg rounded-md divide-y divide-gray-200 text-gray-600 dropdown-menu">
-                      <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Instructor</a></li>
-                      <li class="px-4 py-2 hover:bg-gray-100"><a href="#">User/Student</a></li>
+                      <li class="px-4 py-2 hover:bg-gray-100"><a href="{% url 'profile_form' %}">Edit Profile</a></li>
+                      <li class="px-4 py-2 hover:bg-gray-100"><a href="{% url 'user_profile' %}">View Profile</a></li>
                     </ul>
                   </div>
                   <a href="{% url 'account_logout' %}" class="text-gray-600 hover:text-gray-900">Logout</a>
