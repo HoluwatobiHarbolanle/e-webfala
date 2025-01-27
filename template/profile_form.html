@@ -14,11 +14,18 @@
     <form method="POST" enctype="multipart/form-data" action="{% url 'profile_form' %}" class="gap-8 flex justify-center items-center">
         {% csrf_token %}
         <div class="block m-auto w-fit space-y-4">
+            {% if form.instance.profile_pic %}
             <div class="">
-                <img src="https://via.placeholder.com/150" alt="Profile Picture" class="w-48 h-48 rounded-full object-cover border-4 border-gray-300">
+                <img src="{{ form.instance.profile_pic.url }}" alt="Profile Picture" class="w-48 h-48 rounded-full object-cover border-4 border-gray-300">
             </div>
+            {% endif %}
             <input type="file" name="profile_pic" id="id_profile_pic" class="mt-2 p-2 border rounded-md text-sm" value="{{ form.profile_pic.value }}">
-            <label for="id_profile_pic" class="block text-md font-medium text-gray-700">Profile picture</label> 
+
+            <div class="flex gap-2">
+                <label for="id_profile_pic" class="block text-md font-medium text-gray-700">Profile picture</label> 
+                -
+                <p class="text-md text-gray-700">Save to view!</p>
+            </div>
         </div>
 
         <div class="w-[30rem] space-y-4">
