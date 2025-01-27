@@ -6,10 +6,10 @@
 {% block content %}
 
 {% if profile %}
-<div class="-center bg-white shadow-md rounded-lg p-2 flex items-center gap-4">
+<div class="-center bg-white shadow-md rounded-lg p-2 flex items-center gap-6">
 
     {% if profile.profile_pic %}
-        <div class="flex items-center justify-center w-48 h-48 border rounded-full overflow-hidden">
+        <div class="flex items-center justify-center w-48 h-48 border-2 border-gray-300 rounded-full overflow-hidden">
             <img src="{{ profile.profile_pic.url }}" alt="Profile Picture" class="w-full h-full object-cover">
         </div>
     {% endif %}

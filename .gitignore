@@ -176,3 +176,6 @@ migrations
 
 # Ignore the media folder
 media/
+
+#Hid the password for email configuration
+.env

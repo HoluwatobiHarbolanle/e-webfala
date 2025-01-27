@@ -58,7 +58,4 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.email
     
-class InstructorProfile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete= models.CASCADE)
-    first_name = models.CharField(max_length=20, null=False, blank=False)
-    last_name = models.CharField(max_length=20, null=False, blank=False)
+    
