@@ -6,12 +6,39 @@
 {% block content %}
 
 {% if profile %}
-    <p>First Name: {{ profile.first_name }}</p>
-    <p>Last Name: {{ profile.last_name }}</p>
-    <p>Bio: {{ profile.bio }}</p>
+<div class="-center bg-white shadow-md rounded-lg p-2 flex items-center gap-4">
+
     {% if profile.profile_pic %}
-        <img src="{{ profile.profile_pic.url }}" alt="Profile Picture">
+        <div class="flex items-center justify-center w-48 h-48 border rounded-full overflow-hidden">
+            <img src="{{ profile.profile_pic.url }}" alt="Profile Picture" class="w-full h-full object-cover">
+        </div>
     {% endif %}
+    <div>
+
+        <p class="text-2xl font-bold text-gray-800">{{ profile.first_name }} {{ profile.last_name }}</p>
+        <p class="text-gray-600">Student</p>
+        <p class="mt-2 text-gray-700">{{ profile.bio }}</p>
+    </div>
+
+    <div>
+        {% for course in course %}
+            <p>{{ course.title }}</p>
+        {% endfor %}
+    </div>
+</div>
+
+<div>
+    <h2 class="text-gray-700 text-lg mt-6 font-bold">Courses Registered</h2>
+    <div class="flex flex-wrap bg-white shadow-md rounded-lg p-6 mt-2">
+        {% for course in courses %}
+        <div>
+            <img src="#" alt="Course Cover image" width="400" height="225">
+            <p>{{ course.title }}</p>
+            <p>{{ course.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% else %}
     <p>No profile found for this user.</p>
 {% endif %}

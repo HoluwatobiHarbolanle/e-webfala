@@ -6,6 +6,8 @@ from .forms import UserProfileForm
 from .models import UserProfile
 from django.contrib.auth.views import PasswordResetView
 from dj_rest_auth.views import LogoutView
+from django.conf import settings
+import os
 
 # Create your views here.
 
@@ -47,23 +49,30 @@ def profile_form(request):
         profile = UserProfile(user = request.user)
         
     if request.method == 'POST':
+        if 'profile_pic' in request.FILES:
+            if profile.profile_pic:
+                old_picture_path = os.path.join(settings.MEDIA_ROOT, str(profile.profile_pic))
+                if os.path.isfile(old_picture_path):
+                    os.remove(old_picture_path)
+
         form = UserProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            form.save
+            form.save()
+            print(f"Profile saved for user: {profile.user.username}")
             return redirect('home')
         else:
             print(form.errors)
     else:
         form = UserProfileForm(instance=profile)
-    return render(request, "profile_form.html", {"form": form, "user_profile_type": "student"})
+    return render(request, "profile_form.html", {"form": form})
 
 
 def view_profile(request):
-    user = request.user
     try:
-        profile = UserProfile.objects.get(user)
+        profile = UserProfile.objects.get(user=request.user)  # Get profile for the current user
     except UserProfile.DoesNotExist:
-        profile = None
+        profile = None  # Handle case where profile doesn't exist
+
     return render(request, 'userprofile.html', {'profile': profile})
     
 
