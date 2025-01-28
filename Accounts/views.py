@@ -2,8 +2,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import UserProfileForm
-from .models import UserProfile
+from .forms import UserProfileForm, InstructorProfileForm
+from .models import UserProfile, InstructorProfile
+from django.views import View
 from django.contrib.auth.views import PasswordResetView
 from dj_rest_auth.views import LogoutView
 from django.conf import settings
@@ -42,7 +43,7 @@ class CustomPasswordResetView(PasswordResetView):
     
     
 @login_required
-def profile_form(request):
+def user_profile_form(request):
     try:
         profile = UserProfile.objects.get(user=request.user)
     except UserProfile.DoesNotExist:
@@ -58,16 +59,52 @@ def profile_form(request):
         form = UserProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            print(f"Profile saved for user: {profile.user.username}")
             return redirect('home')
         else:
             print(form.errors)
     else:
         form = UserProfileForm(instance=profile)
-    return render(request, "profile_form.html", {"form": form})
+    return render(request, "user_profile_form.html", {"form": form})
 
 
-def view_profile(request):
+class InstructorProfileView(View): 
+
+
+    def get(self, request, step=1):
+        # Initialize forms based on the step
+        if step == 1:
+            form = UserProfileForm(instance=request.user.userprofile)
+        elif step == 2:
+            instructor_profile, created = InstructorProfile.objects.get_or_create(user=request.user)
+            form = InstructorProfileForm(instance=instructor_profile)
+        else:
+            return redirect('profile_complete')
+
+        return render(request, 'profile/multi_step_form.html', {
+            'form': form,
+            'step': step,
+        })
+    def post(self, request, step=1):
+        # Handle form submissions based on the step
+        if step == 1:
+            form = UserProfileForm(request.POST, request.FILES, instance=request.user.userprofile)
+            if form.is_valid():
+                form.save()
+                return redirect('multi_step_form', step=2)
+        elif step == 2:
+            instructor_profile = InstructorProfile.objects.get(user=request.user)
+            form = InstructorProfileForm(request.POST, instance=instructor_profile)
+            if form.is_valid():
+                form.save()
+                return redirect('profile_complete')
+
+        # Re-render the same template with errors if form is invalid
+        return render(request, 'profile/multi_step_form.html', {
+            'form': form,
+            'step': step,
+        })
+
+def view_user_profile(request):
     try:
         profile = UserProfile.objects.get(user=request.user)  # Get profile for the current user
     except UserProfile.DoesNotExist:
@@ -76,19 +113,6 @@ def view_profile(request):
     return render(request, 'userprofile.html', {'profile': profile})
     
 
-# login_required
-# def profile_view(request):
-#     profile = UserProfile.objects.get(user=request.user)
-
-#     if request.method == 'POST':
-#         form = UserProfileForm(request.POST, instance=profile)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('profile')  
-#     else:
-#         form = UserProfileForm(instance=profile)
-
-#     return render(request, 'profile_form.html', {'form': form, 'profile': profile})
 
 
 

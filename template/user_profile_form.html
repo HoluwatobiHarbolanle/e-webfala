@@ -5,13 +5,13 @@
 {% block content %}
 
 <div class="flex space-x-8 text-lg justify-center font-semibold mb-4">
-    <a href="{% url 'profile_form' %}" class="text-gray-700 hover:underline {% if request.path == '/accounts/profile_form/' %}underline{% endif %}">Student</a>
-    <a href="#" class="text-gray-700 hover:underline {% if request.path == '/accounts/instructor_profile_form/' %}underline{% endif %}">Instructor</a>
+    <a href="{% url 'user_profile_form' %}" class="text-gray-700 hover:underline {% if request.path == '/accounts/profile_form/' %}underline{% endif %}">Student</a>
+    <a href="{% url 'instructor_profile_form' %}" class="text-gray-700 hover:underline {% if request.path == '/accounts/instructor_profile_form/' %}underline{% endif %}">Instructor</a>
 </div>
 
 <div class=" max-w-3xl m-auto rounded-md p-4 shadow-lg bg-white">
     <h2 class="text-2xl font-semibold text-gray-700 text-center mb-6">Profile</h2>
-    <form method="POST" enctype="multipart/form-data" action="{% url 'profile_form' %}" class="gap-8 flex justify-center items-center">
+    <form method="POST" enctype="multipart/form-data" action="{% url 'user_profile_form' %}" class="gap-8 flex justify-center items-center">
         {% csrf_token %}
         <div class="block m-auto w-fit space-y-4">
             {% if form.instance.profile_pic %}

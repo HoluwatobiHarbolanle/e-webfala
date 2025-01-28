@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -201,8 +204,9 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'bolanleoluwatobi844@gmail.com'
-EMAIL_HOST_PASSWORD = "rjkg xpbf zhgt udas"
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL =  'noreply@127.0.0.1'
+
 
 # Redirect URL after login
 LOGIN_REDIRECT_URL = "/"

@@ -59,3 +59,48 @@ class UserProfile(models.Model):
         return self.user.email
     
     
+class InstructorProfile(models.Model):
+    user_profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
+    bio = models.TextField(
+        max_length=500,
+        null=False,
+        blank=False,
+        help_text="Include your specialization, qualifications, and teaching experience."
+    )
+    certificates = models.ImageField(
+        upload_to="instructor_certificates",
+        null=True,
+        blank=True,
+        help_text="Upload relevant certificates."
+    )
+    courses_to_take = models.TextField(
+        null=True,
+        blank=True,
+        help_text="List the courses you want to teach, separated by commas."
+    )
+    AVAILABILITY_CHOICES = [
+        ('full_time', 'Full-Time'),
+        ('part_time', 'Part-Time'),
+        ('other', 'Other'),
+    ]
+    availability = models.CharField(
+        max_length=20,
+        choices=AVAILABILITY_CHOICES,
+        default='full_time',
+        help_text="Select your teaching availability."
+    )
+    other_availability_details = models.TextField(
+        max_length=255,
+        null=True,
+        blank=True,
+        help_text="If 'Other' is selected, provide details here."
+    )
+    teaching_experience = models.BooleanField(
+        default=False,
+        help_text="Do you have prior teaching experience?"
+    )
+
+    def __str__(self):
+        # Fetch names from UserProfile (linked to CustomUser)
+        return f"{self.user_profile.first_name} {self.user_profile.last_name}"
+

@@ -1,0 +1,31 @@
+{% extends 'extra_base.html' %}
+
+{% block title %}Instructor Profile Form - E-webfala{% endblock %}
+
+{% block content %}
+
+<div class="flex space-x-8 text-lg justify-center font-semibold mb-4">
+    <a href="{% url 'user_profile_form' %}" class="text-gray-700 hover:underline {% if request.path == '/accounts/profile_form/' %}underline{% endif %}">Student</a>
+    <a href="{% url 'instructor_profile_form' %}" class="text-gray-700 hover:underline {% if request.path == '/accounts/instructor_profile_form/' %}underline{% endif %}">Instructor</a>
+</div>
+<div class="section {% if step == 1 %}active{% endif %}" id="section-1">
+    <h2>Step 1: User Profile</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Next</button>
+    </form>
+</div>
+
+<!-- Section 2: Instructor Profile Form -->
+<div class="section {% if step == 2 %}active{% endif %}" id="section-2">
+    <h2>Step 2: Instructor Profile</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+
+{% endblock %}
