@@ -1,14 +1,10 @@
 from django.shortcuts import render, get_object_or_404
-<<<<<<< HEAD
 import stripe
 from django.conf import settings
 from django.http import JsonResponse
 from Courses.models import Course, Enrollment
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-=======
-from Courses.models import Course
->>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11
 
 
 # Create your views here.
@@ -28,7 +24,6 @@ def payments(request):
 
     context = {"course": course}
     return render(request, "payments.html", context)
-<<<<<<< HEAD
 
 
 stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
@@ -76,5 +71,3 @@ def success(request):
 
 def cancel(request):
     return render(request, 'cancel.html')
-=======
->>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11

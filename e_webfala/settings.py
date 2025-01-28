@@ -14,15 +14,12 @@ from datetime import timedelta
 from pathlib import Path
 import os
 
-<<<<<<< HEAD
 # cloudinary
 import cloudinary
 import cloudinary_storage
 import cloudinary.uploader
 import cloudinary.api
 
-=======
->>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -36,9 +33,8 @@ SECRET_KEY = "django-insecure-07e_!vg_wx-+*p$6&&@jx$(btlq5$7ar8q0ly*v9547ffh&=30
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://e-webfala.onrender.com']
 
-<<<<<<< HEAD
 CLOUDINARY_API_KEY = '591833219381439'
 CLOUDINARY_API_SECRET = 'aabWRvkz7ExSHohXHXe0R_DzxT4'
 CLOUDINARY_CLOUD_NAME = 'diqkrzze1'
@@ -60,8 +56,6 @@ CLOUDINARY_STORAGE = {
 
 STRIPE_TEST_PUBLIC_KEY = 'pk_test_51Qk7KYEKN3gLB4ZgBYRHxcUyXot1O0IHNUKuVXBvfc5MvTZX8r7tnRR0bapoqV7pslajiqhmfBJN2aLhRTwAhhFF00A3jQgX3G'
 STRIPE_TEST_SECRET_KEY = 'sk_test_51Qk7KYEKN3gLB4ZgUtpVMFnxDPCdiMt1ml8oWa5QIJs8vDghGB75lmD6CeLi35AplzJ4x8J9m6irKfIMnU2hPBO200DkB8MtUo'
-=======
->>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11
 
 # Application definition
 
@@ -90,11 +84,8 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "dj_rest_auth.registration",
     "rest_framework.authtoken",
-<<<<<<< HEAD
     "cloudinary",
     "cloudinary_storage"
-=======
->>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11
 ]
 
 MIDDLEWARE = [
@@ -128,11 +119,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "e_webfala.wsgi.application"
 
-<<<<<<< HEAD
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-=======
->>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -235,20 +223,10 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
-<<<<<<< HEAD
 LOGIN_URL = '/login/'
 
-=======
->>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11
 # Redirect URL after login
 LOGIN_REDIRECT_URL = "/"
 
 # Redirect URL after signup
-<<<<<<< HEAD
 ACCOUNT_SIGNUP_REDIRECT_URL = "/"
-=======
-ACCOUNT_SIGNUP_REDIRECT_URL = '/'
-
-# Redirect to the home page after logout
-ACCOUNT_LOGOUT_REDIRECT_URL = '/'
->>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11

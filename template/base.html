@@ -10,7 +10,6 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
-<<<<<<< HEAD
     <!-- load stripe.js -->
     <script src="https://js.stripe.com/v3/"></script>
     {% block extra_css %}{% endblock %}
@@ -33,53 +32,6 @@
                         <a href="{% url 'account_signup' %}" class="text-gray-600 hover:text-gray-900">Register</a>
                     {% endif %}
                 </div>
-=======
-    {% block extra_css %}{% endblock %}
-
-    <style>
-      .dropdown-menu{
-        margin-top: 0;
-      }
-      .dropdown:hover .dropdown-menu, 
-      .dropdown-menu:hover, .dropdown-menu:focus{
-        display: block;
-      }
-
-    </style>   
-  </head>
-  <body class="bg-gray-100 min-h-screen flex flex-col">
-    <header class="bg-white shadow-md">
-      <nav class="container mx-auto px-6 py-3">
-        <div class="flex justify-between items-center">
-          <div class="text-xl font-semibold text-gray-700">
-            <a href="{% url 'home' %}">E-webfala</a>
-          </div>
-          <div class="border-2 flex gap-4 flex-1 mx-24 rounded-full px-4 py-2">
-            <img src="{% static 'search.svg' %}" alt="search" />
-            <input
-              type="text"
-              placeholder="Search for anything"
-              class="border-none px-2 outline-none w-full"
-            />
-          </div>
-          <div class="space-x-4">
-              <a href="{% url 'category_list' %}" class="text-gray-600 hover:text-gray-900">Categories</a>
-              <a href="{% url 'course_list' %}" class="text-gray-600 hover:text-gray-900">Courses</a>
-              {% if user.is_authenticated %}
-                  <div class="relative inline-block dropdown">
-                    <a href="#" class="text-gray-600 hover:text-gray-900">Profile</a>
-                    <ul class="absolute top-[100%] hidden left-1/2 transform -translate-x-1/2 mt-2 w-32 bg-white shadow-lg rounded-md divide-y divide-gray-200 text-gray-600 dropdown-menu">
-                      <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Instructor</a></li>
-                      <li class="px-4 py-2 hover:bg-gray-100"><a href="#">User/Student</a></li>
-                    </ul>
-                  </div>
-                  <a href="{% url 'account_logout' %}" class="text-gray-600 hover:text-gray-900">Logout</a>
-              {% else %}
-                  <a href="{% url 'account_login' %}" class="text-gray-600 hover:text-gray-900">Login</a>
-                  <a href="{% url 'account_signup' %}" class="text-gray-600 hover:text-gray-900">Register</a>
-              {% endif %}
-          </div>
->>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11
         </div>
       </nav>
     </header>
@@ -102,9 +54,5 @@
     </footer>
     {% block extra_js %}{% endblock %}
   </body>
-<<<<<<< HEAD
 </html>
 
-=======
-</html>
->>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11
