@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-07e_!vg_wx-+*p$6&&@jx$(btlq5$7ar8q0ly*v9547ffh&=30"
+# SECRET_KEY = "django-insecure-07e_!vg_wx-+*p$6&&@jx$(btlq5$7ar8q0ly*v9547ffh&=30"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -54,8 +54,8 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': CLOUDINARY_API_SECRET,
 }
 
-STRIPE_TEST_PUBLIC_KEY = 'pk_test_51Qk7KYEKN3gLB4ZgBYRHxcUyXot1O0IHNUKuVXBvfc5MvTZX8r7tnRR0bapoqV7pslajiqhmfBJN2aLhRTwAhhFF00A3jQgX3G'
-STRIPE_TEST_SECRET_KEY = 'sk_test_51Qk7KYEKN3gLB4ZgUtpVMFnxDPCdiMt1ml8oWa5QIJs8vDghGB75lmD6CeLi35AplzJ4x8J9m6irKfIMnUsk_test_51Qk7KYEKN3gLB4ZgUtpVMFnxDPCdiMt1ml8oWa5QIJs8vDghGB75lmD6CeLi35AplzJ4x8J9m6irKfIMnU2hPBO200DkB8MtUo2hPBO200DkB8MtUo'
+# STRIPE_TEST_PUBLIC_KEY = 'pk_test_51Qk7KYEKN3gLB4ZgBYRHxcUyXot1O0IHNUKuVXBvfc5MvTZX8r7tnRR0bapoqV7pslajiqhmfBJN2aLhRTwAhhFF00A3jQgX3G'
+# STRIPE_TEST_SECRET_KEY = 'sk_test_51Qk7KYEKN3gLB4ZgUtpVMFnxDPCdiMt1ml8oWa5QIJs8vDghGB75lmD6CeLi35AplzJ4x8J9m6irKfIMnUsk_test_51Qk7KYEKN3gLB4ZgUtpVMFnxDPCdiMt1ml8oWa5QIJs8vDghGB75lmD6CeLi35AplzJ4x8J9m6irKfIMnU2hPBO200DkB8MtUo2hPBO200DkB8MtUo'
 
 # Application definition
 
