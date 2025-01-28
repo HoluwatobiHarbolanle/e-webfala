@@ -72,14 +72,14 @@ class Progress(models.Model):
         return f"{self.enrollment.user.username} - {self.lesson.title} ({'Completed' if self.completed else 'Incomplete'})"
 
 
-class InstructorEarning(models.Model):
-    instructor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='earnings')
-    course = models.ForeignKey('Course', on_delete=models.CASCADE, related_name='earnings')
-    total_earnings = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    last_updated = models.DateTimeField(auto_now=True)
+# class InstructorEarning(models.Model):
+#     instructor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='earnings')
+#     course = models.ForeignKey('Course', on_delete=models.CASCADE, related_name='earnings')
+#     total_earnings = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+#     last_updated = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return f"{self.instructor.username} - {self.course.title}: ${self.total_earnings}"
+#     def __str__(self):
+#         return f"{self.instructor.username} - {self.course.title}: ${self.total_earnings}"
 
 class InstructorEarning(models.Model):
     instructor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='earnings')
