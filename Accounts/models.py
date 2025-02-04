@@ -56,26 +56,29 @@ class UserProfile(models.Model):
     courses_registered = models.ManyToManyField(Course)
     
     def __str__(self):
-        return self.user.email
+        return f"UserProfile for {self.user.email}"
     
     
 class InstructorProfile(models.Model):
-    user_profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
+    user_profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE, null=True, blank=True)
+    profile_pic = models.ImageField(upload_to="profile_image", blank=True, null=True)
+    first_name = models.CharField(max_length=20, null=False, blank=False)
+    last_name = models.CharField(max_length=20, null=False, blank=False)
     bio = models.TextField(
         max_length=500,
         null=False,
         blank=False,
         help_text="Include your specialization, qualifications, and teaching experience."
     )
-    certificates = models.ImageField(
+    certificates = models.FileField(
         upload_to="instructor_certificates",
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
         help_text="Upload relevant certificates."
     )
     courses_to_take = models.TextField(
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
         help_text="List the courses you want to teach, separated by commas."
     )
     AVAILABILITY_CHOICES = [
@@ -101,6 +104,6 @@ class InstructorProfile(models.Model):
     )
 
     def __str__(self):
-        # Fetch names from UserProfile (linked to CustomUser)
+        # Fetch names from UserProfile
         return f"{self.user_profile.first_name} {self.user_profile.last_name}"
 

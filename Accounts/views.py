@@ -1,5 +1,5 @@
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from .forms import UserProfileForm, InstructorProfileForm
@@ -60,49 +60,58 @@ def user_profile_form(request):
         if form.is_valid():
             form.save()
             return redirect('home')
-        else:
-            print(form.errors)
     else:
         form = UserProfileForm(instance=profile)
     return render(request, "user_profile_form.html", {"form": form})
 
 
-class InstructorProfileView(View): 
+def instructor_profile_form(request):
+    # Fetch or initialize the UserProfile
+    user_profile, _ = UserProfile.objects.get_or_create(user=request.user)
+    instructor_profile = InstructorProfile.objects.filter(user_profile=user_profile).first()
+    
+    # Initialize the form with existing data (if any)
+    if instructor_profile:
+        # Prepopulate the form with the existing instructor profile
+        form = InstructorProfileForm(instance=instructor_profile)
+    else:
+        # Manually add user_profile data to initial form values
+        initial_data = {
+            "bio": user_profile.bio,
+            "first_name": user_profile.first_name,
+            "last_name": user_profile.last_name,
+            "profile_pic": user_profile.profile_pic,
+        }
+        form = InstructorProfileForm(initial=initial_data)
 
-
-    def get(self, request, step=1):
-        # Initialize forms based on the step
-        if step == 1:
-            form = UserProfileForm(instance=request.user.userprofile)
-        elif step == 2:
-            instructor_profile, created = InstructorProfile.objects.get_or_create(user=request.user)
-            form = InstructorProfileForm(instance=instructor_profile)
+    # Handle POST request
+    if request.method == "POST":
+        if instructor_profile:
+            form = InstructorProfileForm(request.POST, request.FILES, instance=instructor_profile)
         else:
-            return redirect('profile_complete')
+            form = InstructorProfileForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            # Save the form (creates or updates InstructorProfile)
+            instructor_profile = form.save(commit=False)
+            # Ensure the user_profile is linked correctly
+            instructor_profile.user_profile = user_profile
+            instructor_profile.save()
+            print("Profile saved with data:", instructor_profile)  
+            return redirect("home")  # Redirect to a success page
+        else:
+            print("Form not valid. Errors:", form.errors)
+    else:
+        form = InstructorProfileForm(instance=instructor_profile)
+        
+    return render(request, "instructor_profile_form.html", {"form": form})
 
-        return render(request, 'profile/multi_step_form.html', {
-            'form': form,
-            'step': step,
-        })
-    def post(self, request, step=1):
-        # Handle form submissions based on the step
-        if step == 1:
-            form = UserProfileForm(request.POST, request.FILES, instance=request.user.userprofile)
-            if form.is_valid():
-                form.save()
-                return redirect('multi_step_form', step=2)
-        elif step == 2:
-            instructor_profile = InstructorProfile.objects.get(user=request.user)
-            form = InstructorProfileForm(request.POST, instance=instructor_profile)
-            if form.is_valid():
-                form.save()
-                return redirect('profile_complete')
+def instructor_view(request):
+    user_profile = get_object_or_404(UserProfile, user=request.user)
+    instructor_profile = InstructorProfile.objects.filter(user_profile=user_profile).first()
 
-        # Re-render the same template with errors if form is invalid
-        return render(request, 'profile/multi_step_form.html', {
-            'form': form,
-            'step': step,
-        })
+    return render(request, "instructor_profile.html", {"user_profile": user_profile, "instructor_profile": instructor_profile})
+
 
 def view_user_profile(request):
     try:
@@ -111,7 +120,6 @@ def view_user_profile(request):
         profile = None  # Handle case where profile doesn't exist
 
     return render(request, 'userprofile.html', {'profile': profile})
-    
 
 
 

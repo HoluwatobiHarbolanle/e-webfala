@@ -8,6 +8,10 @@ class UserProfileForm(forms.ModelForm):
         fields = ['profile_pic', 'first_name', 'last_name', 'bio'] 
         
 class InstructorProfileForm(forms.ModelForm):
+    # first_name = forms.CharField(required=True)
+    # last_name = forms.CharField(required=True)
+    # profile_pic = forms.ImageField(required=False)
+    # bio = forms.CharField(widget=forms.Textarea, required=True)
     class Meta:
         model = InstructorProfile
-        fields = '__all__'
+        fields = ['bio', 'certificates', 'courses_to_take', 'availability', 'other_availability_details', 'teaching_experience', 'first_name', 'last_name', 'profile_pic']
