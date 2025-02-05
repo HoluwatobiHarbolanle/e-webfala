@@ -14,7 +14,7 @@ def home(request):
 
 def create_admin(request):
     User = get_user_model()
-    if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser('admin', 'aishatmurtadho@gmail.com', 'Abdulwaahid@1963')
+    if not User.objects.filter(email="admin").exists():
+        User.objects.create_superuser(email='aishatmurtadho@gmail.com', password='Abdulwaahid@1963')
         return HttpResponse("Superuser created!")
     return HttpResponse("Admin already exists.")
