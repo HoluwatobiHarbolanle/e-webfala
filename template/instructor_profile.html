@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Instructor Profile - E-webfala{% endblock %}
+
+{% block content %}
+
+<div class="flex space-x-8 text-lg justify-center font-semibold mb-2">
+    <a href="{% url 'user_profile' %}" class="text-gray-700 hover:underline {% if request.path == '/accounts/user_profile/' %}underline{% endif %}">Student</a>
+    <a href="{% url 'instructor_profile' %}" class="text-gray-700 hover:underline {% if request.path == '/accounts/instructor_profile/' %}underline{% endif %}">Instructor</a>
+</div>
+
+<h1>Profile Information</h1>
+<p><strong>Bio:</strong> {{ instructor_profile.bio }}</p>
+{% if instructor_profile %}
+    <p><strong>First Name:</strong> {{ instructor_profile.first_name }}</p>
+    <p><strong>Last Name:</strong> {{ instructor_profile.last_name }}</p>
+    <p><strong>Profile Picture:</strong> <img src="{{ instructor_profile.profile_pic.url }}" alt="Profile Picture" /></p>
+{% else %}
+    <p>No instructor profile created yet.</p>
+{% endif %}
+
+{% endblock %}

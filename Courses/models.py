@@ -4,13 +4,17 @@ from django.conf import settings
 # Create your models here.
 
 
+class Category(models.Model):
+    category_name = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.category_name
+
 class Course(models.Model):
     instructor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField()
-    category = models.CharField(
-        max_length=255, blank=True
-    )  # create category model and assign relation
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='courses')# create category model and assign relation
     price = models.DecimalField(
         max_digits=10, decimal_places=2, default=0.00, blank=True, null=True
     )
@@ -43,3 +47,4 @@ class Lesson(models.Model):
 
     def __str__(self):
         return f"{self.title} ({self.course.title})"
+    

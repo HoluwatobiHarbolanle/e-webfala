@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +31,9 @@ SECRET_KEY = "django-insecure-07e_!vg_wx-+*p$6&&@jx$(btlq5$7ar8q0ly*v9547ffh&=30
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+# ALLOWED_HOSTS = ['e-webfala.com', 'www.e-webfala.com', , ]
+
 
 
 # Application definition
@@ -185,19 +191,27 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 REST_AUTH_SERIALIZERS = {"LOGIN_SERIALIZER": "Accounts.serializers.LoginSerializer"}
 
+
 AUTH_USER_MODEL = "Accounts.CustomUser"
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'bolanleoluwatobi844@gmail.com'
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL =  'noreply@127.0.0.1'
+
 
 # Redirect URL after login
 LOGIN_REDIRECT_URL = "/"
 
 # Redirect URL after signup
 ACCOUNT_SIGNUP_REDIRECT_URL = '/'
-
-# Redirect to the home page after logout
-ACCOUNT_LOGOUT_REDIRECT_URL = '/'
