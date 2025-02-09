@@ -1,4 +1,6 @@
 
+from django.shortcuts import render
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
@@ -11,6 +13,7 @@ from django.conf import settings
 import os
 
 # Create your views here.
+
 
 
 def custom_login_view(request):
@@ -120,7 +123,5 @@ def view_user_profile(request):
         profile = None  # Handle case where profile doesn't exist
 
     return render(request, 'userprofile.html', {'profile': profile})
-
-
 
 

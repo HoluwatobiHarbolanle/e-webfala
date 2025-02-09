@@ -5,6 +5,8 @@ clone your fork
 create a new branch
 make changes
 create pr
+<<<<<<< HEAD
+=======
 
 GITHUB CLONING PROCESS
 
@@ -34,3 +36,4 @@ Contribute to the repository
 4. Commit your changes using 'git add .' and git commit -m"<commit_message>".
 5. Push your changes to the remote repository using 'git push origin <branch_name>'.
 6. Create a pull request to merge your changes into the main branch.
+>>>>>>> 841eeeea387a928f1446e8cbf39a8bf08abe4b11

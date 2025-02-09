@@ -18,6 +18,12 @@ from dotenv import load_dotenv
 load_dotenv
 
 
+# cloudinary
+import cloudinary
+import cloudinary_storage
+import cloudinary.uploader
+import cloudinary.api
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,37 +37,60 @@ SECRET_KEY = "django-insecure-07e_!vg_wx-+*p$6&&@jx$(btlq5$7ar8q0ly*v9547ffh&=30
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-# ALLOWED_HOSTS = ['e-webfala.com', 'www.e-webfala.com', , ]
+ALLOWED_HOSTS = ['e-webfala-wnn7.onrender.com', '127.0.0.1', 'localhost']
 
 
+CLOUDINARY_API_KEY = '591833219381439'
+CLOUDINARY_API_SECRET = 'aabWRvkz7ExSHohXHXe0R_DzxT4'
+CLOUDINARY_CLOUD_NAME = 'diqkrzze1'
+
+# Cloudinary config
+cloudinary.config(
+    cloud_name=CLOUDINARY_CLOUD_NAME,
+    api_key=CLOUDINARY_API_KEY,
+    api_secret=CLOUDINARY_API_SECRET,
+    secure=True  # Ensures HTTPS is used
+)
+
+# Cloudinary storage settings
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': CLOUDINARY_CLOUD_NAME,
+    'API_KEY': CLOUDINARY_API_KEY,
+    'API_SECRET': CLOUDINARY_API_SECRET,
+}
+
+STRIPE_TEST_PUBLIC_KEY = 'pk_test_51Qk7KYEKN3gLB4ZgBYRHxcUyXot1O0IHNUKuVXBvfc5MvTZX8r7tnRR0bapoqV7pslajiqhmfBJN2aLhRTwAhhFF00A3jQgX3G'
+STRIPE_TEST_SECRET_KEY = 'sk_test_51Qk7KYEKN3gLB4ZgUtpVMFnxDPCdiMt1ml8oWa5QIJs8vDghGB75lmD6CeLi35AplzJ4x8J9m6irKfIMnUsk_test_51Qk7KYEKN3gLB4ZgUtpVMFnxDPCdiMt1ml8oWa5QIJs8vDghGB75lmD6CeLi35AplzJ4x8J9m6irKfIMnU2hPBO200DkB8MtUo2hPBO200DkB8MtUo'
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.sites',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'api',
-    'Courses',
-    'payments',
-    'Accounts',
-    'home',
-    'style',
-    'drf_yasg',
-    'rest_framework',
-    'rest_framework_simplejwt',
-    'dj_rest_auth',  
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'dj_rest_auth.registration',
-    'rest_framework.authtoken' , 
-
+    "django.contrib.sites",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "api",
+    "Courses",
+    "payments",
+    "Accounts",
+    "home",
+    "tailwind",
+    "style",
+    "django_browser_reload",
+    "drf_yasg",
+    "rest_framework",
+    "rest_framework_simplejwt",
+    "dj_rest_auth",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "dj_rest_auth.registration",
+    "rest_framework.authtoken",
+    "cloudinary",
+    "cloudinary_storage"
 ]
 
 MIDDLEWARE = [
@@ -95,6 +124,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "e_webfala.wsgi.application"
 
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -105,6 +136,17 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+# postgresql://admin:KPWxJ50R3MM7UqzCfH8WgzfUujc2FN2S@dpg-cucabgaj1k6c73b7hfh0-a/e_webfala_db
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv('DB_NAME'),
+#         'USER': os.getenv('DB_USER'),
+#         'PASSWORD': os.getenv('DB_PASSWORD'),
+#         'HOST': os.getenv('DB_HOST'),
+#         'PORT': os.getenv('DB_PORT'),
+#     }
+# }
 
 
 # Password validation
@@ -198,6 +240,8 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
+LOGIN_URL = '/login/'
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -212,4 +256,4 @@ DEFAULT_FROM_EMAIL =  'noreply@127.0.0.1'
 LOGIN_REDIRECT_URL = "/"
 
 # Redirect URL after signup
-ACCOUNT_SIGNUP_REDIRECT_URL = '/'
+ACCOUNT_SIGNUP_REDIRECT_URL = "/"
