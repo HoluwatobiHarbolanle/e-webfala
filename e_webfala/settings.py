@@ -39,7 +39,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['e-webfala-wnn7.onrender.com', '127.0.0.1', 'localhost']
 
-
 CLOUDINARY_API_KEY = '591833219381439'
 CLOUDINARY_API_SECRET = 'aabWRvkz7ExSHohXHXe0R_DzxT4'
 CLOUDINARY_CLOUD_NAME = 'diqkrzze1'
@@ -102,6 +101,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
 ]
 
 ROOT_URLCONF = "e_webfala.urls"
@@ -136,6 +136,7 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
 # postgresql://admin:KPWxJ50R3MM7UqzCfH8WgzfUujc2FN2S@dpg-cucabgaj1k6c73b7hfh0-a/e_webfala_db
 # DATABASES = {
 #     'default': {
@@ -214,6 +215,9 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
