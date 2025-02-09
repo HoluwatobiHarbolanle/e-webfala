@@ -1,11 +1,8 @@
 from django.shortcuts import render
 from Courses.models import Course
-<<<<<<< HEAD
-=======
 
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
->>>>>>> upstream/main
 
 # Create your views here.
 
