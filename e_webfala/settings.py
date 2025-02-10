@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv
+
 
 # cloudinary
 import cloudinary
@@ -33,7 +37,7 @@ SECRET_KEY = "django-insecure-07e_!vg_wx-+*p$6&&@jx$(btlq5$7ar8q0ly*v9547ffh&=30
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['e-webfala-wnn7.onrender.com']
+ALLOWED_HOSTS = ['e-webfala-wnn7.onrender.com', '127.0.0.1', 'localhost']
 
 CLOUDINARY_API_KEY = '591833219381439'
 CLOUDINARY_API_SECRET = 'aabWRvkz7ExSHohXHXe0R_DzxT4'
@@ -126,23 +130,24 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-# postgresql://admin:KPWxJ50R3MM7UqzCfH8WgzfUujc2FN2S@dpg-cucabgaj1k6c73b7hfh0-a/e_webfala_db
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# postgresql://admin:KPWxJ50R3MM7UqzCfH8WgzfUujc2FN2S@dpg-cucabgaj1k6c73b7hfh0-a/e_webfala_db
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv('DB_NAME'),
+#         'USER': os.getenv('DB_USER'),
+#         'PASSWORD': os.getenv('DB_PASSWORD'),
+#         'HOST': os.getenv('DB_HOST'),
+#         'PORT': os.getenv('DB_PORT'),
+#     }
+# }
 
 
 # Password validation
@@ -230,6 +235,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 REST_AUTH_SERIALIZERS = {"LOGIN_SERIALIZER": "Accounts.serializers.LoginSerializer"}
 
+
 AUTH_USER_MODEL = "Accounts.CustomUser"
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
@@ -239,6 +245,16 @@ ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
 LOGIN_URL = '/login/'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'bolanleoluwatobi844@gmail.com'
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL =  'noreply@127.0.0.1'
+
 
 # Redirect URL after login
 LOGIN_REDIRECT_URL = "/"
