@@ -70,11 +70,11 @@ class InstructorProfile(models.Model):
         blank=False,
         help_text="Include your specialization, qualifications, and teaching experience."
     )
-    certificates = models.FileField(
-        upload_to="instructor_certificates",
+    cv = models.FileField(
+        upload_to="instructor_cv's",
         null=False,
         blank=False,
-        help_text="Upload relevant certificates."
+        help_text="Upload your CV."
     )
     courses_to_take = models.TextField(
         null=False,
