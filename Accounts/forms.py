@@ -14,4 +14,4 @@ class InstructorProfileForm(forms.ModelForm):
     # bio = forms.CharField(widget=forms.Textarea, required=True)
     class Meta:
         model = InstructorProfile
-        fields = ['bio', 'certificates', 'courses_to_take', 'availability', 'other_availability_details', 'teaching_experience', 'first_name', 'last_name', 'profile_pic']
+        fields = ['bio', 'cv', 'courses_to_take', 'availability', 'other_availability_details', 'teaching_experience', 'first_name', 'last_name', 'profile_pic']

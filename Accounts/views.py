@@ -62,7 +62,7 @@ def user_profile_form(request):
         form = UserProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('user_profile')
     else:
         form = UserProfileForm(instance=profile)
     return render(request, "user_profile_form.html", {"form": form})
@@ -101,7 +101,7 @@ def instructor_profile_form(request):
             instructor_profile.user_profile = user_profile
             instructor_profile.save()
             print("Profile saved with data:", instructor_profile)  
-            return redirect("home")  # Redirect to a success page
+            return redirect("instructor_profile")  # Redirect to a success page
         else:
             print("Form not valid. Errors:", form.errors)
     else:
