@@ -8,10 +8,16 @@ class LessonSerializer(serializers.ModelSerializer):
 
 class CourseSerializer(serializers.ModelSerializer):
     instructor = serializers.CharField(source='instructor.username', read_only=True) 
+    cover_photo = serializers.SerializerMethodField() 
+
+    def get_cover_photo(self, obj):
+        if obj.cover_photo:
+            return obj.cover_photo.url
+        return "https://placehold.co/400x225" 
 
     class Meta:
         model = Course
-        fields = ['id', 'title', 'description', 'instructor', 'price', 'category', 'created_at']
+        fields = ['id', 'title', 'description', 'instructor', 'price', 'category', 'created_at', 'cover_photo']
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
