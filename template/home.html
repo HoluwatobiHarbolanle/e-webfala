@@ -29,7 +29,7 @@
 
     {% for course in courses %}
     <div class="bg-primary p-6 rounded-lg">
-      <img src="{{ course.image_url }}" alt="Course Image" class="w-full h-auto object-cover rounded-lg mb-4"
+      <img src="{{ course.cover_photo.url }}" alt="Course Image" class="w-full h-auto object-cover rounded-lg mb-4"
         width="400" height="225" />
       <h4 class="text-xl font-semibold text-secondary mb-2">
         {{ course.title }}
